@@ -7,11 +7,13 @@ from project import db
 from project.api.models import User
 from project.tests.base import BaseTestCase
 
+
 def add_user(username, email):
     user = User(username=username, email=email)
     db.session.add(user)
     db.session.commit()
     return user
+
 
 class TestUserService(BaseTestCase):
 
@@ -114,6 +116,40 @@ class TestUserService(BaseTestCase):
             self.assertEqual(response.status_code, 404)
             self.assertIn('User does not exist', data['message'])
             self.assertIn('fail', data['status'])
+
+    def test_main_no_users(self):
+        """Ensure the main route behaves correctly when no users have
+        been added to the database."""
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'All Users', response.data)
+        self.assertIn(b'<p>No users!</p>', response.data)
+
+    def test_main_with_users(self):
+        """Ensure the main route behaves correctly when users have been
+        added to the database"""
+        add_user('george', 'george@gmail.com')
+        add_user('paul', 'paul@gmail.com')
+        with self.client:
+            response = self.client.get('/')
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'All Users', response.data)
+            self.assertNotIn(b'<p>No users!</p>', response.data)
+            self.assertIn(b'george', response.data)
+            self.assertIn(b'paul', response.data)
+
+    def test_main_add_user(self):
+        with self.client:
+            response = self.client.post(
+                '/',
+                data=dict(username='kevin', email='kevin@sonotreal.com'),
+                follow_redirects=True
+            )
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'All Users', response.data)
+            self.assertNotIn(b'<p>No users!</p>', response.data)
+            self.assertIn(b'kevin', response.data)
+
 
 if __name__ == '__main__':
     unittest.main()
