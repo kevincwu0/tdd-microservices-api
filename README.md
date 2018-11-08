@@ -1,6 +1,9 @@
 # TDD Microservices API with Flask, Docker, TDD, EC2.
 microservices with flask, docker, aws, tdd, etc.
 
+[![Build Status](https://travis-ci.org/kevincw0/testdriven-app.svg?branch=master)](https://travis-ci.org/kevincw0/testdriven-app)
+
+
 1. Introduction (Part 1, Lesson 1) 
     1. Reproducible Development Env with Docker
     2. Create a RESTful API powered by Python, Postgres, and Flask
