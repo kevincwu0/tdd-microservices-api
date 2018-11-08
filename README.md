@@ -1,8 +1,7 @@
 # TDD Microservices API with Flask, Docker, TDD, EC2.
 microservices with flask, docker, aws, tdd, etc.
 
-[![Build Status](https://travis-ci.org/kevincw0/testdriven-app.svg?branch=master)](https://travis-ci.org/kevincw0/testdriven-app)
-
+[![Build Status](https://travis-ci.org/kevincwu0/tdd-microservices-api.svg?branch=master)](https://travis-ci.org/kevincwu0/tdd-microservices-api)
 
 1. Introduction (Part 1, Lesson 1) 
     1. Reproducible Development Env with Docker
