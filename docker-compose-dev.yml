@@ -42,7 +42,7 @@ services:
       - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
     depends_on:
       - users
-      
+
   nginx:
     build:
       context: ./services/nginx
